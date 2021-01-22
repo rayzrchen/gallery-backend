@@ -1,10 +1,10 @@
 package com.haorui.gallerybackend.service
 
+import com.haorui.gallerybackend.config.AppNotFoundException
 import com.haorui.gallerybackend.model.Gallery
 import com.haorui.gallerybackend.model.GalleryRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
-import java.util.*
 
 interface GalleryService {
 
@@ -27,17 +27,19 @@ class GalleryServiceImpl(
     override fun create(gallery: Gallery): Gallery {
         gallery.createTime = System.currentTimeMillis()
         gallery.numberOfView = 0
+        if (gallery.title.isBlank()) {
+            throw RuntimeException("title should not be blank")
+        }
         return galleryRepository.save(gallery)
     }
 
     override fun delete(id: String) {
-        galleryRepository.findByIdOrNull(id) ?: throw RuntimeException("Not Found")
+        galleryRepository.findByIdOrNull(id) ?: throw AppNotFoundException(id)
         galleryRepository.deleteById(id)
     }
 
     override fun update(gallery: Gallery): Gallery {
-        val gallery1 = galleryRepository.findByIdOrNull(gallery.id) ?: throw RuntimeException("Not Found")
-        gallery1.previewPic = gallery.previewPic
+        val gallery1 = galleryRepository.findByIdOrNull(gallery.id) ?: throw AppNotFoundException("")
         gallery1.title = gallery.title
         gallery1.numberOfView = gallery.numberOfView
         return galleryRepository.save(gallery1)
@@ -48,7 +50,7 @@ class GalleryServiceImpl(
     }
 
     override fun getOne(id: String): Gallery {
-        return galleryRepository.findByIdOrNull(id) ?: throw RuntimeException("Not Found")
+        return galleryRepository.findByIdOrNull(id) ?: throw AppNotFoundException("")
     }
 
 }

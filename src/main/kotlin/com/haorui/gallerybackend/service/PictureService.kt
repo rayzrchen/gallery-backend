@@ -1,13 +1,16 @@
 package com.haorui.gallerybackend.service
 
+import com.haorui.gallerybackend.config.AppNotFoundException
 import com.haorui.gallerybackend.model.Picture
 import com.haorui.gallerybackend.model.PictureRepository
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
 
 interface PictureService  {
 
-//    fun upload(picture: Picture, file: FileInputStream): Picture
+    fun upload(galleryId: String, file: MultipartFile): Picture
 
     fun delete(id: String)
 
@@ -23,26 +26,30 @@ interface PictureService  {
 class PictureServiceImpl(
     private val pictureRepository: PictureRepository
 ): PictureService {
-//    override fun upload(file: FilePart): Picture {
-//
-//        file.
-//
-//        return pictureRepository.save(
-//            Picture(
-//                filename = file.filename(),
-//
-//            )
-//        )
-//    }
+
+    override fun upload(galleryId: String, file: MultipartFile): Picture {
+        return pictureRepository.save(
+            Picture(
+                pictureBinary = file.bytes,
+                filename = file.originalFilename ?: file.name,
+                fileSize = file.size,
+                galleryId = galleryId,
+                memo = "",
+                numberOfView = 0,
+//                pictureType = file.contentType ?: "",
+                uploadTime = System.currentTimeMillis()
+            )
+        )
+    }
+
 
     override fun delete(id: String) {
-        pictureRepository.findByIdOrNull(id) ?: throw RuntimeException("Not Found")
+        pictureRepository.findByIdOrNull(id) ?: throw AppNotFoundException("")
         pictureRepository.deleteById(id)
     }
 
     override fun update(picture: Picture): Picture {
-        val picture1 = pictureRepository.findByIdOrNull(picture.id) ?: throw RuntimeException("Not Found")
-        picture1.category = picture.category
+        val picture1 = pictureRepository.findByIdOrNull(picture.id) ?: throw AppNotFoundException("")
         picture1.memo = picture.memo
         return pictureRepository.save(picture1)
     }
@@ -52,7 +59,7 @@ class PictureServiceImpl(
     }
 
     override fun getOne(id: String): Picture {
-        return pictureRepository.findByIdOrNull(id)?: throw RuntimeException("Not Found")
+        return pictureRepository.findByIdOrNull(id)?: throw AppNotFoundException("")
     }
 
 }

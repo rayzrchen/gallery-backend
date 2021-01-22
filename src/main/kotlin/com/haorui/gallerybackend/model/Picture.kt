@@ -2,31 +2,34 @@ package com.haorui.gallerybackend.model
 
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Lob
 
 @Entity
 data class Picture(
     @Id
     var id: String = UUID.randomUUID().toString(),
 
-    var pictureType: String,
-    var numberOfView: Long,
-    var galleryId: String,
+//    var pictureType: String,
+    var numberOfView: Long = 0,
+    var galleryId: String = "",
 
-    var filename: String,
-    var fileSize: String,
-    var dimension: String,
-    var exif: String,
-    var category: String,
-    var photographer: String,
-    var memo: String,
+    var filename: String = "",
+    var fileSize: Long = 0,
+//    var dimension: String,
+//    var exif: String,
+//    var category: String,
+//    var photographer: String,
+    @Column(columnDefinition = "TEXT")
+    var memo: String = "",
 
+    @Lob
     var pictureBinary: ByteArray,
 
-    var uploadTime: Long,
-
-    ) {
+    var uploadTime: Long = 0,
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -34,15 +37,15 @@ data class Picture(
         other as Picture
 
         if (id != other.id) return false
-        if (pictureType != other.pictureType) return false
+//        if (pictureType != other.pictureType) return false
         if (numberOfView != other.numberOfView) return false
         if (galleryId != other.galleryId) return false
         if (filename != other.filename) return false
         if (fileSize != other.fileSize) return false
-        if (dimension != other.dimension) return false
-        if (exif != other.exif) return false
-        if (category != other.category) return false
-        if (photographer != other.photographer) return false
+//        if (dimension != other.dimension) return false
+//        if (exif != other.exif) return false
+//        if (category != other.category) return false
+//        if (photographer != other.photographer) return false
         if (memo != other.memo) return false
         if (uploadTime != other.uploadTime) return false
 
@@ -51,15 +54,15 @@ data class Picture(
 
     override fun hashCode(): Int {
         var result = id.hashCode()
-        result = 31 * result + pictureType.hashCode()
+//        result = 31 * result + pictureType.hashCode()
         result = 31 * result + numberOfView.hashCode()
         result = 31 * result + galleryId.hashCode()
         result = 31 * result + filename.hashCode()
         result = 31 * result + fileSize.hashCode()
-        result = 31 * result + dimension.hashCode()
-        result = 31 * result + exif.hashCode()
-        result = 31 * result + category.hashCode()
-        result = 31 * result + photographer.hashCode()
+//        result = 31 * result + dimension.hashCode()
+//        result = 31 * result + exif.hashCode()
+//        result = 31 * result + category.hashCode()
+//        result = 31 * result + photographer.hashCode()
         result = 31 * result + memo.hashCode()
         result = 31 * result + uploadTime.hashCode()
         return result
