@@ -1,0 +1,125 @@
+POST http://localhost:80/api/item
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+###
+
+###
+POST http://localhost:8080/gallery
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOTkiLCJhdXRoIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTYxMTQxNDQ1MywiZXhwIjoxNjExNDE4MDUzfQ.WYTDAOf_D8zcpSjc7IQFVH5Zb3nVih1Zwb6fi_M7paU
+
+{
+  "title": "test gallery",
+  "description": "only some sample data"
+}
+
+<> 2021-01-23T230826.200.json
+<> 2021-01-23T211159.200.json
+<> 2021-01-23T211143.200.json
+<> 2021-01-23T023301.200.json
+<> 2021-01-23T023133.200.json
+<> 2021-01-23T022925.500.json
+<> 2021-01-23T022232.200.json
+<> 2021-01-23T021923.500.json
+<> 2021-01-23T021825.400.json
+<> 2021-01-23T021200.400.json
+<> 2021-01-23T020657.400.json
+<> 2021-01-23T020603.400.json
+
+###
+DELETE http://localhost:8080/gallery/c5d7004e-f3c0-4218-ac3c-9b76702140d3
+
+<> 2021-01-23T211220.200.json
+<> 2021-01-23T023305.200.json
+<> 2021-01-23T023146.200.json
+<> 2021-01-23T022430.404.json
+<> 2021-01-23T022305.200.json
+<> 2021-01-23T020612.404.json
+<> 2021-01-23T015253.404.json
+
+###
+PUT http://localhost:8080/gallery
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOTkiLCJhdXRoIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTYxMTQxNDQ1MywiZXhwIjoxNjExNDE4MDUzfQ.WYTDAOf_D8zcpSjc7IQFVH5Zb3nVih1Zwb6fi_M7paU
+Content-Type: application/json
+
+{
+  "id": "7fe3209c-bbc6-496a-a410-577fdccf02f6",
+  "createUserId": "1234",
+  "title": "first gallery",
+  "description": "only some sample data"
+}
+
+<> 2021-01-22T225721.200.json
+
+###
+GET http://localhost:8080/picture/68e93a2a-f278-4ff7-8acb-367d53b12374
+
+<> 2021-01-23T211348.200.json
+
+###
+
+GET http://localhost:8080/picture/68e93a2a-f278-4ff7-8acb-367d53b12374/2c111f50-b250-446b-bdd6-3e527171aa31
+
+<> 2021-01-23T211421.200.json
+<> 2021-01-22T232627.500.json
+<> 2021-01-22T232535.500.json
+
+###
+POST http://localhost:8080/picture/68e93a2a-f278-4ff7-8acb-367d53b12374
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="surface go.jpg"
+
+< C:\Users\rayzr\Pictures\surface go.jpg
+--WebAppBoundary--
+
+<> 2021-01-23T211257.200.json
+<> 2021-01-23T014119.200.json
+<> 2021-01-23T013344.200.json
+
+###
+POST http://localhost:8080/users/register
+Content-Type: application/json
+
+{
+  "username": "199",
+  "password": "123",
+  "roles": [1]
+}
+
+<> 2021-01-23T230733.200.txt
+<> 2021-01-23T230351.200.txt
+<> 2021-01-23T230341.200.json
+<> 2021-01-23T230308.200.txt
+<> 2021-01-23T225936.200.txt
+<> 2021-01-23T225401.200.txt
+<> 2021-01-23T225029.200.json
+<> 2021-01-23T224955.200.json
+
+###
+POST http://localhost:8080/users/login
+Content-Type: application/x-www-form-urlencoded
+
+username=189&password=123
+
+<> 2021-01-23T225945.200.txt
+<> 2021-01-23T225608.200.json
+
+###
+GET http://localhost:8080/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxODkiLCJhdXRoIjpbeyJhdXRob3JpdHkiOiJST0xFX0FETUlOIn0seyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTYxMTQxMzk4NSwiZXhwIjoxNjExNDE3NTg1fQ.cfCkwPssfwLGSGtIvwCYrqUp3bnHwE1xkgV9ayVa1vc
+
+<> 2021-01-23T230053.200.json
+<> 2021-01-23T230040.403.json
+<> 2021-01-23T230030.200.json
+
+###
+GET http://localhost:8080/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOTkiLCJhdXRoIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTYxMTQxNDIzMSwiZXhwIjoxNjExNDE3ODMxfQ.kRNL0Bne7EPO5F-OX1G0tJCvqQfsYIAT1mHN7wsPlMk
+
+<> 2021-01-23T230402.200.json
+<> 2021-01-23T230318.200.json
+
