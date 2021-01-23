@@ -3,12 +3,13 @@ package com.haorui.gallerybackend.service
 import com.haorui.gallerybackend.config.AppNotFoundException
 import com.haorui.gallerybackend.model.Gallery
 import com.haorui.gallerybackend.model.GalleryRepository
+import com.haorui.gallerybackend.model.User
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 interface GalleryService {
 
-    fun create(gallery: Gallery): Gallery
+    fun create(gallery: Gallery, user: User): Gallery
 
     fun delete(id: String)
 
@@ -23,13 +24,14 @@ interface GalleryService {
 @Service
 class GalleryServiceImpl(
     private val galleryRepository: GalleryRepository
-): GalleryService {
-    override fun create(gallery: Gallery): Gallery {
+) : GalleryService {
+    override fun create(gallery: Gallery, user: User): Gallery {
         gallery.createTime = System.currentTimeMillis()
         gallery.numberOfView = 0
         if (gallery.title.isBlank()) {
             throw RuntimeException("title should not be blank")
         }
+        gallery.username = user.username
         return galleryRepository.save(gallery)
     }
 
@@ -46,7 +48,7 @@ class GalleryServiceImpl(
     }
 
     override fun getAll(): List<Gallery> {
-       return galleryRepository.findByOrderByCreateTimeDesc()
+        return galleryRepository.findByOrderByCreateTimeDesc()
     }
 
     override fun getOne(id: String): Gallery {

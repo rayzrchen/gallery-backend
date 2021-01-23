@@ -12,7 +12,7 @@ data class Gallery(
     @Id
     var id: String = UUID.randomUUID().toString(),
 
-    var createUserId: String = "",
+    var username: String = "",
     var createTime: Long = 0,
 
     var title: String = "",
