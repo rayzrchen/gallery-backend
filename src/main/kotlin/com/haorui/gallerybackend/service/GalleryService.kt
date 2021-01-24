@@ -5,6 +5,8 @@ import com.haorui.gallerybackend.model.Gallery
 import com.haorui.gallerybackend.model.GalleryRepository
 import com.haorui.gallerybackend.model.User
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
 
 interface GalleryService {
@@ -25,6 +27,7 @@ interface GalleryService {
 class GalleryServiceImpl(
     private val galleryRepository: GalleryRepository
 ) : GalleryService {
+
     override fun create(gallery: Gallery, user: User): Gallery {
         gallery.createTime = System.currentTimeMillis()
         gallery.numberOfView = 0
@@ -48,7 +51,8 @@ class GalleryServiceImpl(
     }
 
     override fun getAll(): List<Gallery> {
-        return galleryRepository.findByOrderByCreateTimeDesc()
+        val username = (SecurityContextHolder.getContext().authentication.principal as UserDetails).username
+        return galleryRepository.findByUsernameOrderByCreateTimeDesc(username)
     }
 
     override fun getOne(id: String): Gallery {

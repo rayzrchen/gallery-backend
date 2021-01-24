@@ -23,5 +23,5 @@ data class Gallery(
 )
 
 interface GalleryRepository: JpaRepository<Gallery, String> {
-    fun findByOrderByCreateTimeDesc(): List<Gallery>
+    fun findByUsernameOrderByCreateTimeDesc(username: String): List<Gallery>
 }

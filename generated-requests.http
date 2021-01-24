@@ -1,17 +1,14 @@
-POST http://localhost:80/api/item
-Content-Type: application/x-www-form-urlencoded
+GET http://localhost:8080/gallery
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOTkiLCJhdXRoIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTYxMTUwMjcxMCwiZXhwIjoxNjExNTA2MzEwfQ.bmN1wcThZjdJLKB4N7NaFEHHxBXWUzYQ0ge7kxBPIEM
 
-id=99&content=new-element
-
-###
 
 ###
 POST http://localhost:8080/gallery
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOTkiLCJhdXRoIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTYxMTQxNDQ1MywiZXhwIjoxNjExNDE4MDUzfQ.WYTDAOf_D8zcpSjc7IQFVH5Zb3nVih1Zwb6fi_M7paU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMDAiLCJhdXRoIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTYxMTUwMjczMywiZXhwIjoxNjExNTA2MzMzfQ.BnBhegwi2iGB9hlEHmJRb9fjMc27HAQ8gd46Ye2mbMg
 
 {
-  "title": "test gallery",
+  "title": "test gallery -> 000",
   "description": "only some sample data"
 }
 
@@ -46,7 +43,6 @@ Content-Type: application/json
 
 {
   "id": "7fe3209c-bbc6-496a-a410-577fdccf02f6",
-  "createUserId": "1234",
   "title": "first gallery",
   "description": "only some sample data"
 }
@@ -85,7 +81,7 @@ POST http://localhost:8080/users/register
 Content-Type: application/json
 
 {
-  "username": "199",
+  "username": "000",
   "password": "123",
   "roles": [1]
 }
